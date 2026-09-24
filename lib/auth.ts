@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { prisma } from "./prisma";
 
 const COOKIE = "treko_session";
-const SECRET = process.env.AUTH_SECRET || "change-me-in-production";
+const SECRET = process.env.AUTH_SECRET || (process.env.NODE_ENV === "production" ? "" : "dev-only-change-me");
 
 function b64(input:string){ return Buffer.from(input).toString("base64url"); }
 function unb64(input:string){ return Buffer.from(input,"base64url").toString(); }
@@ -20,6 +20,7 @@ export function verifyPassword(password:string, stored:string){
   return timingSafeEqual(Buffer.from(hash,"hex"),Buffer.from(actual,"hex"));
 }
 function sign(payload:string){
+  if(!SECRET) throw new Error("AUTH_SECRET_MISSING");
   return createHmac("sha256",SECRET).update(payload).digest("base64url");
 }
 export function makeSession(artistId:string){
@@ -28,7 +29,11 @@ export function makeSession(artistId:string){
 }
 function decode(token:string){
   const [payload,sig]=token.split(".");
-  if(!payload||!sig||!timingSafeEqual(Buffer.from(sig),Buffer.from(sign(payload)))) return null;
+  if(!payload || !sig) return null;
+  const expected = sign(payload);
+  const actualBuffer = Buffer.from(sig);
+  const expectedBuffer = Buffer.from(expected);
+  if (actualBuffer.length !== expectedBuffer.length || !timingSafeEqual(actualBuffer, expectedBuffer)) return null;
   const data=JSON.parse(unb64(payload));
   return data.exp>Date.now()?data:null;
 }
