@@ -1,0 +1,9 @@
+"use client";
+import {useEffect,useState} from "react"; import Link from "next/link";
+export default function Promotions(){
+ const [items,setItems]=useState<any[]>([]),[error,setError]=useState("");
+ async function load(){const r=await fetch("/api/admin/promotions");const d=await r.json();if(!r.ok){setError(d.error||"Unable to load");return}setItems(d.promotions||[])}
+ useEffect(()=>{load()},[]);
+ async function update(id:string,status:string){const r=await fetch("/api/admin/promotions/"+id,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({status})});const d=await r.json();if(!r.ok){setError(d.error||"Update failed");return}setItems((x)=>x.filter((p)=>p.id!==id))}
+ return <main className="shell"><nav className="nav"><Link className="brand" href="/">TREKO <span>MUSI</span></Link><Link href="/admin" className="btn ghost">Admin</Link></nav><section className="section"><div className="eyebrow">Campaign Management</div><h2>Promotion Requests</h2>{error&&<p style={{color:"#ffd400"}}>{error}</p>}<div style={{display:"grid",gap:16,marginTop:24}}>{items.map((p)=><div className="card" key={p.id}><h3>{p.title}</h3><p className="muted">Artist: {p.artist.stageName} · {p.artist.email}</p><p>{p.goal}</p><p className="muted">Audience: {p.targetAudience||"Not specified"} · Platforms: {p.platforms||"Not specified"}</p><p>Budget: {p.budget?p.budget.toLocaleString()+" RWF":"Not specified"}</p><button className="btn primary" onClick={()=>update(p.id,"APPROVED")}>Approve</button> <button className="btn ghost" onClick={()=>update(p.id,"REJECTED")}>Reject</button></div>)}{items.length===0&&<div className="card"><p className="muted">No pending promotion requests.</p></div>}</div></section></main>
+}
