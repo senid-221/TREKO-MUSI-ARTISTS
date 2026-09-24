@@ -1,0 +1,70 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql" url = env("DATABASE_URL") }
+
+enum MembershipStatus { PENDING ACTIVE EXPIRED CANCELLED }
+enum PromotionStatus { PENDING APPROVED RUNNING COMPLETED REJECTED }
+enum PaymentStatus { PENDING PAID FAILED REFUNDED }
+
+model Artist {
+  id String @id @default(cuid())
+  stageName String
+  fullName String
+  email String @unique
+  phone String?
+  genre String?
+  bio String?
+  avatarUrl String?
+  membershipStatus MembershipStatus @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  payments Payment[]
+  releases Release[]
+  promotions PromotionRequest[]
+  posts CommunityPost[]
+}
+
+model Payment {
+  id String @id @default(cuid())
+  artistId String
+  artist Artist @relation(fields:[artistId], references:[id], onDelete:Cascade)
+  amount Int
+  currency String @default("RWF")
+  provider String
+  reference String?
+  status PaymentStatus @default(PENDING)
+  createdAt DateTime @default(now())
+}
+
+model Release {
+  id String @id @default(cuid())
+  artistId String
+  artist Artist @relation(fields:[artistId], references:[id], onDelete:Cascade)
+  title String
+  type String
+  artworkUrl String?
+  musicUrl String?
+  releasedAt DateTime?
+  createdAt DateTime @default(now())
+}
+
+model PromotionRequest {
+  id String @id @default(cuid())
+  artistId String
+  artist Artist @relation(fields:[artistId], references:[id], onDelete:Cascade)
+  title String
+  goal String?
+  budget Int?
+  targetAudience String?
+  platforms String?
+  status PromotionStatus @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CommunityPost {
+  id String @id @default(cuid())
+  artistId String
+  artist Artist @relation(fields:[artistId], references:[id], onDelete:Cascade)
+  content String
+  createdAt DateTime @default(now())
+}
