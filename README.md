@@ -1,3 +1,3 @@
-# TREKO MUSI ARTISTS
+# TREKO MUSIC ARTISTS
 
-Artist growth platform for Treko Musi Rwanda.
+Artist growth platform for Treko Musicc.
