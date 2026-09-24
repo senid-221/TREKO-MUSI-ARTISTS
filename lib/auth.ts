@@ -42,7 +42,15 @@ export async function getCurrentArtist(){
   if(!token) return null;
   const data=decode(token);
   if(!data?.sub) return null;
-  return prisma.artist.findUnique({where:{id:data.sub}});
+  const artist = await prisma.artist.findUnique({where:{id:data.sub}});
+  if (!artist) return null;
+  if (artist.membershipStatus === "ACTIVE" && artist.membershipExpiresAt && artist.membershipExpiresAt <= new Date()) {
+    return prisma.artist.update({
+      where: { id: artist.id },
+      data: { membershipStatus: "EXPIRED" },
+    });
+  }
+  return artist;
 }
 export async function requireArtist(){
   const artist=await getCurrentArtist();
