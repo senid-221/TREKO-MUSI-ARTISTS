@@ -9,7 +9,7 @@ export default function Payment() {
   const [error, setError] = useState("");
 
   const whatsappNumber = "250726969060";
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello Treko Musi Rwanda, I want to subscribe to the membership plan.")}`;
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello Treko Musicc, I want to subscribe to the membership plan.")}`;
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -41,14 +41,14 @@ export default function Payment() {
           <div className="eyebrow">Membership Payment</div>
           <h2>Subscribe through WhatsApp</h2>
           <p className="muted">
-            Contact Treko Musi Rwanda on WhatsApp, pay for your selected membership plan,
+            Contact Treko Musicc on WhatsApp, pay for your selected membership plan,
             then return here and upload your payment screenshot or PDF for admin approval.
           </p>
 
           {whatsappNumber && (
             <p>
               <a className="btn primary" href={whatsappUrl} target="_blank" rel="noreferrer">
-                Open Treko Musi on WhatsApp
+                Open Treko Music on WhatsApp
               </a>
             </p>
           )}
@@ -59,7 +59,7 @@ export default function Payment() {
             <>
               <h3>Payment proof submitted ✓</h3>
               <p className="muted">
-                Your request is <strong>{status}</strong>. Treko Musi Rwanda will review your
+                Your request is <strong>{status}</strong>. Treko Musicc will review your
                 payment proof. Your membership becomes active only after admin approval.
               </p>
               <Link href="/dashboard" className="btn primary">Go to Dashboard</Link>
