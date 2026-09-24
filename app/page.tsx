@@ -3,11 +3,11 @@ import {ArrowRight, Music2, Users, Megaphone, Upload, Menu as MenuIcon, MessageC
 import {getCurrentArtist} from "@/lib/auth";
 
 const partners=[
- {name:"Country Records",url:"https://www.country-records.com/",logo:"https://pbs.twimg.com/profile_images/1609316068207509504/UpcikZhx.jpg"},
- {name:"1:55 AM",url:"https://x.com/155AmMedia",logo:"https://pbs.twimg.com/profile_images/1866865047856615424/jPedRpsu_400x400.jpg"},
- {name:"CB Records",url:"#",logo:"https://st.fl.ru/users/pe/pekktasdesign/portfolio/f_197631a3c16c56c8.jpg"},
- {name:"OutRage Music Records",url:"https://kraftkartel.github.io/outrage-site/",logo:null},
- {name:"Capital Records",url:"#",logo:null}
+ {name:"Country Records",logo:"https://pbs.twimg.com/profile_images/1609316068207509504/UpcikZhx.jpg"},
+ {name:"1:55 AM",logo:"https://pbs.twimg.com/profile_images/1866865047856615424/jPedRpsu_400x400.jpg"},
+ {name:"CB Records",logo:"https://st.fl.ru/users/pe/pekktasdesign/portfolio/f_197631a3c16c56c8.jpg"},
+ {name:"OutRage Music Records",logo:null},
+ {name:"Capital Records",logo:null}
 ];
 
 const services=[
@@ -33,9 +33,9 @@ export default async function Home(){
    <div className="footer-inner">
     <div className="footer-brand"><Link href="/" className="brand footer-logo"><span className="brand-mark"><Music2 size={13}/></span>TREKO <span>MUSIC</span></Link><p>Music promotion, distribution and artist growth platform in Rwanda.</p></div>
     <div className="footer-block" id="contact"><h4>Contact</h4><a href="https://wa.me/250726969060" target="_blank" rel="noreferrer"><MessageCircle size={13}/> WhatsApp</a><a href="tel:+250726969060"><Phone size={13}/> +250 726 969 060</a><a href="mailto:info@trekomusic.com"><Mail size={13}/> info@trekomusic.com</a></div>
-    <div className="footer-block"><h4>Social</h4><div className="social-links"><a href="https://www.instagram.com/" target="_blank" rel="noreferrer"><Instagram size={15}/><span>Instagram</span></a><a href="https://www.facebook.com/" target="_blank" rel="noreferrer"><Facebook size={15}/><span>Facebook</span></a><a href="https://www.tiktok.com/" target="_blank" rel="noreferrer"><Music2 size={15}/><span>TikTok</span></a></div></div>
+    <div className="footer-block"><h4>Social</h4><div className="social-links"><a href={process.env.NEXT_PUBLIC_TREKO_INSTAGRAM || "#"} target="_blank" rel="noreferrer"><Instagram size={15}/><span>Instagram</span></a><a href={process.env.NEXT_PUBLIC_TREKO_FACEBOOK || "#"} target="_blank" rel="noreferrer"><Facebook size={15}/><span>Facebook</span></a><a href={process.env.NEXT_PUBLIC_TREKO_TIKTOK || "#"} target="_blank" rel="noreferrer"><Music2 size={15}/><span>TikTok</span></a></div></div>
    </div>
-   <div className="partners"><div className="partners-heading"><span>Partners & Studios</span><small>Rwanda</small></div><div className="partner-grid">{partners.map((partner)=><a className="partner" href={partner.url} target={partner.url!=="#" ? "_blank" : undefined} rel={partner.url!=="#" ? "noreferrer" : undefined} key={partner.name}><div className="partner-logo">{partner.logo ? <img src={partner.logo} alt={partner.name+" logo"} loading="lazy"/> : <span className="partner-text-logo">{partner.name}</span>}</div><span>{partner.name}</span></a>)}</div></div>
+   <div className="partners"><div className="partners-heading"><span>Partners & Studios</span><small>Rwanda</small></div><div className="partner-grid">{partners.map((partner)=><a className="partner" href={`https://wa.me/${process.env.NEXT_PUBLIC_TREKO_WHATSAPP_NUMBER || "250726969060"}?text=${encodeURIComponent("Hello Treko Music Admin, I would like to contact you about " + partner.name)}`} target="_blank" rel="noreferrer" key={partner.name}><div className="partner-logo">{partner.logo ? <img src={partner.logo} alt={partner.name+" logo"} loading="lazy"/> : <span className="partner-text-logo">{partner.name}</span>}</div><span>{partner.name}</span></a>)}</div></div>
    <div className="footer-bottom">© 2026 Treko Music • Treko Music Artists</div>
   </footer>
  </main>
