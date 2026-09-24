@@ -13,7 +13,7 @@ function PlansForm(){
   setLoading(plan);setError("");
   const r=await fetch("/api/service-requests",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({service,plan})});
   const d=await r.json();setLoading("");
-  if(!r.ok){if(r.status===401){router.push("/login");return}setError(d.error||"Unable to submit request");return}
+  if(!r.ok){if(r.status===401){router.push("/login?next="+encodeURIComponent("/plans?service="+service));return}setError(d.error||"Unable to submit request");return}
   router.push("/payment?plan="+encodeURIComponent(plan)+"&requestId="+encodeURIComponent(d.requestId)+"&service="+encodeURIComponent(service));
  }
  return <main className="shell"><nav className="nav"><Link className="brand" href="/">TREKO <span>MUSIC</span></Link><Link href="/dashboard" className="btn ghost">Profile</Link></nav>
