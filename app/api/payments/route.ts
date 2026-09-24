@@ -12,6 +12,7 @@ export async function POST(req: Request) {
     const form = await req.formData();
     const plan = String(form.get("plan") || "");
     const phone = String(form.get("phone") || "").trim();
+    const requestId = String(form.get("requestId") || "").trim();
     const proof = form.get("proof");
 
     const amount = prices[plan];
@@ -39,6 +40,7 @@ export async function POST(req: Request) {
         proofFile: bytes,
         proofMimeType: proof.type,
         proofFilename: proof.name,
+        reference: requestId || undefined,
         status: "PENDING",
       },
     });
