@@ -1,6 +1,61 @@
 "use client";
-import {useEffect,useState} from "react"; import Link from "next/link";
-export default function Artists(){const [items,setItems]=useState<any[]>([]),[error,setError]=useState("");
-async function load(){const r=await fetch("/api/admin/artists");const d=await r.json();if(!r.ok){setError(d.error||"Unable to load");return}setItems(d.artists||[])}useEffect(()=>{load()},[]);
-async function update(id:string,membershipStatus:string){const r=await fetch("/api/admin/artists/"+id,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({membershipStatus})});if(!r.ok){const d=await r.json();setError(d.error||"Update failed");return}load()}
-return <main className="shell"><nav className="nav"><Link className="brand" href="/">TREKO <span>MUSIC</span></Link><Link href="/admin" className="btn ghost">Admin</Link></nav><section className="section"><div className="eyebrow">Artist Management</div><h2>Artists</h2>{error&&<p style={{color:"#ffd400"}}>{error}</p>}<div style={{display:"grid",gap:14,marginTop:24}}>{items.map(a=><div className="card" key={a.id}><h3>{a.stageName}</h3><p className="muted">{a.fullName} · {a.email}</p><p>Plan: <b>{a.membershipPlan}</b> · Status: <b>{a.membershipStatus}</b></p><p className="muted">{a.genre||"Genre not set"} · {a._count.releases} releases · {a._count.promotions} promotions · {a._count.posts} posts</p><div style={{display:"flex",gap:8,flexWrap:"wrap"}}><button className="btn primary" onClick={()=>update(a.id,"ACTIVE")}>Activate</button><button className="btn ghost" onClick={()=>update(a.id,"EXPIRED")}>Expire</button><button className="btn ghost" onClick={()=>update(a.id,"CANCELLED")}>Cancel</button></div></div>)}{items.length===0&&<div className="card"><p className="muted">No artists found.</p></div>}</div></section></main>
+import { useEffect, useState } from "react";
+import Link from "next/link";
+
+export default function Artists() {
+  const [items, setItems] = useState<any[]>([]);
+  const [error, setError] = useState("");
+
+  async function load() {
+    const r = await fetch("/api/admin/artists");
+    const d = await r.json();
+    if (!r.ok) { setError(d.error || "Unable to load"); return; }
+    setItems(d.artists || []);
+  }
+
+  useEffect(() => { load(); }, []);
+
+  async function update(id: string, membershipStatus: string) {
+    const r = await fetch("/api/admin/artists/" + id, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ membershipStatus }),
+    });
+    if (!r.ok) {
+      const d = await r.json();
+      setError(d.error || "Update failed");
+      return;
+    }
+    load();
+  }
+
+  return (
+    <main className="shell">
+      <nav className="nav">
+        <Link className="brand" href="/">TREKO <span>MUSIC</span></Link>
+        <Link href="/admin" className="btn ghost">Admin</Link>
+      </nav>
+      <section className="section">
+        <div className="eyebrow">Artist Management</div>
+        <h2>Artists</h2>
+        {error && <p style={{ color: "#ffd400" }}>{error}</p>}
+        <div style={{ display: "grid", gap: 14, marginTop: 24 }}>
+          {items.map((a) => (
+            <div className="card" key={a.id}>
+              <h3>{a.stageName}</h3>
+              <p className="muted">{a.fullName} · {a.email}</p>
+              <p>Plan: <b>{a.membershipPlan}</b> · Status: <b>{a.membershipStatus}</b></p>
+              <p className="muted">{a.genre || "Genre not set"} · {a._count.releases} releases · {a._count.promotions} promotions · {a._count.posts} posts</p>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <button className="btn primary" onClick={() => update(a.id, "ACTIVE")}>Activate</button>
+                <button className="btn ghost" onClick={() => update(a.id, "EXPIRED")}>Expire</button>
+                <button className="btn ghost" onClick={() => update(a.id, "CANCELLED")}>Cancel</button>
+              </div>
+            </div>
+          ))}
+          {items.length === 0 && <div className="card"><p className="muted">No artists found.</p></div>}
+        </div>
+      </section>
+    </main>
+  );
+}
