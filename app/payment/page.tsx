@@ -8,10 +8,8 @@ export default function Payment() {
   const [status, setStatus] = useState("PENDING");
   const [error, setError] = useState("");
 
-  const whatsappNumber = process.env.NEXT_PUBLIC_TREKO_WHATSAPP_NUMBER || "";
-  const whatsappUrl = whatsappNumber
-    ? `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, "")}`
-    : "#";
+  const whatsappNumber = "250726969060";
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello Treko Musi Rwanda, I want to subscribe to the membership plan.")}`;
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -41,10 +39,10 @@ export default function Payment() {
       <section className="section" style={{ maxWidth: 720 }}>
         <div className="card">
           <div className="eyebrow">Membership Payment</div>
-          <h2>Pay through WhatsApp</h2>
+          <h2>Subscribe through WhatsApp</h2>
           <p className="muted">
-            Send your membership payment through WhatsApp using the payment instructions
-            provided by Treko Musi Rwanda. After paying, upload your payment screenshot or PDF here.
+            Contact Treko Musi Rwanda on WhatsApp, pay for your selected membership plan,
+            then return here and upload your payment screenshot or PDF for admin approval.
           </p>
 
           {whatsappNumber && (
