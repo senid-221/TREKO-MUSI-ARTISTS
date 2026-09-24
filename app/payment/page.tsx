@@ -38,7 +38,7 @@ function PaymentForm() {
   return (
     <main className="shell">
       <nav className="nav">
-        <Link className="brand" href="/">TREKO <span>MUSI</span></Link>
+        <Link className="brand" href="/">TREKO <span>MUSIC</span></Link>
       </nav>
 
       <section className="section" style={{ maxWidth: 720 }}>
@@ -64,7 +64,7 @@ function PaymentForm() {
             <>
               <h3>Payment proof submitted ✓</h3>
               <p className="muted">
-                Your request is <strong>{status}</strong>. Treko Musicc will review your
+                Your request is <strong>{status}</strong>. Treko Music will review your
                 payment proof. Your membership becomes active only after admin approval.
               </p>
               <Link href="/dashboard" className="btn primary">Go to Dashboard</Link>
