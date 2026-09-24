@@ -1,0 +1,2 @@
+import {NextResponse} from "next/server"; import {requireAdmin} from "@/lib/auth"; import {prisma} from "@/lib/prisma";
+export async function GET(){try{await requireAdmin();const payments=await prisma.payment.findMany({where:{status:"PENDING"},orderBy:{createdAt:"asc"},include:{artist:{select:{stageName:true,email:true,phone:true}}});return NextResponse.json({payments})}catch(e:any){return NextResponse.json({error:e?.message==="FORBIDDEN"?"Forbidden":"Unauthorized"},{status:e?.message==="FORBIDDEN"?403:401})}}
