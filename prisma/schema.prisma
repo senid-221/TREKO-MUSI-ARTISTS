@@ -40,6 +40,9 @@ model Payment {
   phone String?
   reference String?
   externalTransactionId String?
+  proofFile Bytes?
+  proofMimeType String?
+  proofFilename String?
   status PaymentStatus @default(PENDING)
   createdAt DateTime @default(now())
   verifiedAt DateTime?
