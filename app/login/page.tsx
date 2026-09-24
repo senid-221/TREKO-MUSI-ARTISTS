@@ -3,7 +3,7 @@ import {useState} from "react";
 import {useRouter,useSearchParams} from "next/navigation";
 import Link from "next/link";
 export default function Login(){
- const router=useRouter(); const params=useSearchParams();
+ const router=useRouter(); const params=useSearchParams(); const next=params.get("next");
  const [error,setError]=useState(""); const [loading,setLoading]=useState(false);
  async function submit(e:React.FormEvent<HTMLFormElement>){
   e.preventDefault();setLoading(true);setError("");
@@ -11,7 +11,7 @@ export default function Login(){
   const r=await fetch("/api/auth/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(Object.fromEntries(f))});
   const d=await r.json();setLoading(false);
   if(!r.ok){setError(d.error||"Login failed");return}
-  router.push(d.role==="ADMIN"?"/admin/dashboard":"/dashboard"); router.refresh();
+  router.push(d.role==="ADMIN"?"/admin/dashboard":(next||"/dashboard")); router.refresh();
  }
  return <main className="shell"><section className="section login-page" style={{maxWidth:500}}>
   <div className="card">
