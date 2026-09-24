@@ -33,7 +33,7 @@ function RegisterForm() {
       return;
     }
 
-    router.push("/payment");
+    router.push("/login?registered=1");
   }
 
   return (
