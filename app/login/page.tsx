@@ -1,8 +1,9 @@
 "use client";
-import {useState} from "react";
+import {Suspense,useState} from "react";
 import {useRouter,useSearchParams} from "next/navigation";
 import Link from "next/link";
-export default function Login(){
+
+function LoginForm(){
  const router=useRouter(); const params=useSearchParams(); const next=params.get("next");
  const [error,setError]=useState(""); const [loading,setLoading]=useState(false);
  async function submit(e:React.FormEvent<HTMLFormElement>){
@@ -23,3 +24,4 @@ export default function Login(){
   </div>
  </section></main>
 }
+export default function Login(){return <Suspense fallback={<main className="shell"><section className="section login-page" style={{maxWidth:500}}/></main>}><LoginForm/></Suspense>}
