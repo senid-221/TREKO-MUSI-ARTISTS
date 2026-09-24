@@ -22,3 +22,17 @@
 .footer-bottom{border-top:1px solid #202020;padding:10px 6%;color:#666;text-align:center;font-size:9px}
 @media(max-width:800px){.footer-inner{grid-template-columns:1fr 1fr;gap:18px;padding-top:18px}.footer-brand{grid-column:1/-1}.partner-grid{grid-template-columns:repeat(5,1fr);gap:5px}.partner{padding:7px 3px}.partner-logo{height:32px}.partner-logo img{width:29px;height:29px}.partner>span:last-child{font-size:7px}}
 @media(max-width:520px){.footer-inner{grid-template-columns:1fr 1fr}.footer-brand{grid-column:1/-1}.social-links{display:grid;grid-template-columns:1fr}.social-links a{justify-content:flex-start}.partner-grid{grid-template-columns:repeat(3,1fr)}}
+
+/* Compact partner row + text-only social links */
+.partner-grid{display:flex;align-items:center;justify-content:space-between;gap:5px}
+.partner{flex:1;background:transparent;border:0;border-radius:0;padding:3px 2px}
+.partner:hover{transform:none;border:0}
+.partner-logo{height:22px;margin:0}
+.partner-logo img{width:20px;height:20px;border-radius:3px}
+.partner-text-logo{font-size:7px;max-width:65px}
+.partner>span:last-child{font-size:6px;margin-top:2px}
+.social-links{display:flex;gap:10px}
+.social-links a{border:0;background:transparent;padding:0;font-size:10px;color:#aaa}
+.social-links a svg{display:none}
+.social-links a:hover{background:transparent;color:#ffd400}
+@media(max-width:520px){.partner-grid{gap:2px}.partner-logo{height:18px}.partner-logo img{width:16px;height:16px}.partner>span:last-child{font-size:5px}.social-links{gap:8px}}
