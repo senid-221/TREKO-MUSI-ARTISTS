@@ -22,7 +22,6 @@ export async function POST(req: Request) {
         provider: "MTN_MOMO",
         phone: phone.trim(),
         status: "PENDING",
-        externalTransactionId: undefined,
       },
     });
 
