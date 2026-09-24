@@ -19,8 +19,8 @@ async function getAccessToken() {
   const response = await fetch(`${baseUrl}/collection/token/`, {
     method: "POST",
     headers: {
-      Authorization: `Basic ${credentials}`,
-      "Ocp-Apim-Subscription-Key": subscriptionKey,
+      "Authorization": `Basic ${credentials}`,
+      "Ocp-Apim-Subscription-Key": subscriptionKey || "",
       "X-Target-Environment": targetEnvironment,
       "Content-Type": "application/json",
     },
@@ -63,8 +63,8 @@ export async function requestToPay(input: {
       currency,
       externalId: input.externalId,
       payer: { partyIdType: "MSISDN", partyId: normalizeMsisdn(input.phone) },
-      payerMessage: input.payerMessage || "Treko Musi Artists membership",
-      payeeNote: input.payeeNote || "Treko Musi Rwanda",
+      payerMessage: input.payerMessage || "Treko Music membership",
+      payeeNote: input.payeeNote || "Treko Music",
     }),
     cache: "no-store",
   });
