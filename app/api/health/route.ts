@@ -1,0 +1,1 @@
+import {NextResponse} from "next/server"; export async function GET(){return NextResponse.json({ok:true,service:"Treko Musi Artists",company:"Treko Musi Rwanda"});}
