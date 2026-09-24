@@ -8,10 +8,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum MembershipStatus { PENDING ACTIVE EXPIRED CANCELLED }
-enum PromotionStatus { PENDING APPROVED RUNNING COMPLETED REJECTED }
-enum PaymentStatus { PENDING PAID FAILED REFUNDED }
-enum UserRole { ARTIST ADMIN }
+enum MembershipStatus {
+  PENDING
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+enum PromotionStatus {
+  PENDING
+  APPROVED
+  RUNNING
+  COMPLETED
+  REJECTED
+}
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+enum UserRole {
+  ARTIST
+  ADMIN
+}
 
 model Artist {
   id String @id @default(cuid())
