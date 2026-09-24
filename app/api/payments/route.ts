@@ -22,6 +22,7 @@ export async function POST(req: Request) {
         provider: "MTN_MOMO",
         phone: phone.trim(),
         status: "PENDING",
+        externalTransactionId: undefined,
       },
     });
 
@@ -38,6 +39,7 @@ export async function POST(req: Request) {
         where: { id: payment.id },
         data: {
           reference: momo.referenceId,
+          currency: momo.currency,
           provider: "MTN_MOMO",
         },
       });
