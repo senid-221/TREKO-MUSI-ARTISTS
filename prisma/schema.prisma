@@ -54,6 +54,19 @@ model Artist {
   posts CommunityPost[]
   comments CommunityComment[]
   likes CommunityLike[]
+  serviceRequests ServiceRequest[]
+}
+
+model ServiceRequest {
+  id String @id @default(cuid())
+  artistId String
+  artist Artist @relation(fields:[artistId], references:[id], onDelete:Cascade)
+  service String
+  plan String
+  amount Int
+  status String @default("PENDING")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Payment {
