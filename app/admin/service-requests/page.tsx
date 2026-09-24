@@ -1,0 +1,9 @@
+"use client";
+import {useEffect,useState} from "react"; import Link from "next/link";
+export default function ServiceRequests(){
+ const [items,setItems]=useState<any[]>([]),[error,setError]=useState("");
+ async function load(){const r=await fetch("/api/admin/service-requests");const d=await r.json();if(!r.ok){setError(d.error||"Unable to load");return}setItems(d.requests||[])}
+ useEffect(()=>{load()},[]);
+ async function update(id:string,status:string){const r=await fetch("/api/admin/service-requests",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({id,status})});const d=await r.json();if(!r.ok){setError(d.error||"Update failed");return}setItems(x=>x.filter(i=>i.id!==id))}
+ return <main className="shell"><nav className="nav"><Link className="brand" href="/">TREKO <span>MUSIC</span></Link><Link href="/admin/dashboard" className="btn ghost">Admin Dashboard</Link></nav><section className="section"><div className="eyebrow">Artist Services</div><h2>Pending Service Requests</h2>{error&&<p className="login-error">{error}</p>}<div style={{display:"grid",gap:14,marginTop:20}}>{items.map(x=><div className="card" key={x.id}><h3>{x.service==="community"?"Join Artists Community":x.service==="promotion"?"Promote Your Song":"Distribute Your Song"}</h3><p className="muted">{x.artist.stageName} · {x.artist.email}</p><p><b>{x.plan}</b> · {x.amount.toLocaleString()} RWF</p><p className="muted">WhatsApp: {x.artist.phone||"—"} · {new Date(x.createdAt).toLocaleString()}</p><button className="btn primary" onClick={()=>update(x.id,"APPROVED")}>Approve</button> <button className="btn ghost" onClick={()=>update(x.id,"REJECTED")}>Reject</button></div>)}{items.length===0&&<div className="card"><p className="muted">No pending service requests.</p></div>}</div></section></main>
+}
