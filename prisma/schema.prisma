@@ -4,23 +4,30 @@ datasource db { provider = "postgresql" url = env("DATABASE_URL") }
 enum MembershipStatus { PENDING ACTIVE EXPIRED CANCELLED }
 enum PromotionStatus { PENDING APPROVED RUNNING COMPLETED REJECTED }
 enum PaymentStatus { PENDING PAID FAILED REFUNDED }
+enum UserRole { ARTIST ADMIN }
 
 model Artist {
   id String @id @default(cuid())
   stageName String
   fullName String
   email String @unique
+  passwordHash String
   phone String?
   genre String?
   bio String?
   avatarUrl String?
+  role UserRole @default(ARTIST)
+  membershipPlan String @default("Artist")
   membershipStatus MembershipStatus @default(PENDING)
+  membershipExpiresAt DateTime?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   payments Payment[]
   releases Release[]
   promotions PromotionRequest[]
   posts CommunityPost[]
+  comments CommunityComment[]
+  likes CommunityLike[]
 }
 
 model Payment {
@@ -30,9 +37,11 @@ model Payment {
   amount Int
   currency String @default("RWF")
   provider String
+  phone String?
   reference String?
   status PaymentStatus @default(PENDING)
   createdAt DateTime @default(now())
+  verifiedAt DateTime?
 }
 
 model Release {
@@ -67,4 +76,26 @@ model CommunityPost {
   artist Artist @relation(fields:[artistId], references:[id], onDelete:Cascade)
   content String
   createdAt DateTime @default(now())
+  comments CommunityComment[]
+  likes CommunityLike[]
+}
+
+model CommunityComment {
+  id String @id @default(cuid())
+  postId String
+  artistId String
+  post CommunityPost @relation(fields:[postId], references:[id], onDelete:Cascade)
+  artist Artist @relation(fields:[artistId], references:[id], onDelete:Cascade)
+  content String
+  createdAt DateTime @default(now())
+}
+
+model CommunityLike {
+  id String @id @default(cuid())
+  postId String
+  artistId String
+  post CommunityPost @relation(fields:[postId], references:[id], onDelete:Cascade)
+  artist Artist @relation(fields:[artistId], references:[id], onDelete:Cascade)
+  createdAt DateTime @default(now())
+  @@unique([postId, artistId])
 }
