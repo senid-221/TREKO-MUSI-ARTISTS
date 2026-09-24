@@ -1,15 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useState } from "react";
 import Link from "next/link";
 
-export default function Payment() {
+function PaymentForm() {
   const [sent, setSent] = useState(false);
   const [status, setStatus] = useState("PENDING");
   const [error, setError] = useState("");
+  const params = useSearchParams();
+  const selectedPlan = params.get("plan") || "Artist";
+  const requestId = params.get("requestId") || "";
+  const service = params.get("service") || "community";
 
   const whatsappNumber = "250726969060";
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello Treko Musicc, I want to subscribe to the membership plan.")}`;
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hello Treko Music, I want to send payment proof for ${service} (${selectedPlan} plan).`)}`;
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -41,14 +46,14 @@ export default function Payment() {
           <div className="eyebrow">Membership Payment</div>
           <h2>Subscribe through WhatsApp</h2>
           <p className="muted">
-            Contact Treko Musicc on WhatsApp, pay for your selected membership plan,
+            Request submitted. Contact Treko Music on WhatsApp, pay for your selected plan,
             then return here and upload your payment screenshot or PDF for admin approval.
           </p>
 
           {whatsappNumber && (
             <p>
               <a className="btn primary" href={whatsappUrl} target="_blank" rel="noreferrer">
-                Open Treko Music on WhatsApp
+                Send Payment Proof on WhatsApp
               </a>
             </p>
           )}
@@ -66,7 +71,8 @@ export default function Payment() {
             </>
           ) : (
             <form onSubmit={submit} encType="multipart/form-data" style={{ display: "grid", gap: 14 }}>
-              <select name="plan" className="field" defaultValue="Artist">
+              <input type="hidden" name="requestId" value={requestId}/>
+              <select name="plan" className="field" defaultValue={selectedPlan}>
                 <option value="Artist">Artist — 10,000 RWF</option>
                 <option value="Growth">Growth — 25,000 RWF</option>
                 <option value="Pro">Pro — 50,000 RWF</option>
@@ -91,3 +97,5 @@ export default function Payment() {
     </main>
   );
 }
+
+export default function Payment(){return <Suspense fallback={<main className="shell"/>}><PaymentForm/></Suspense>}
