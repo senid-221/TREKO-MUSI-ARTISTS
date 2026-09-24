@@ -28,7 +28,6 @@ export default async function Home(){
    <p>A platform for artists to grow their audience, promote music, connect, and grow their careers.</p>
    <div className="actions">{artist?<Link className="btn primary" href="/dashboard">Artist Profile <ArrowRight size={14}/></Link>:<><Link className="btn primary" href="/register">Create Artist Account <ArrowRight size={14}/></Link><Link className="btn ghost" href="/login">Artist Login</Link></>}</div>
   </div></section>
-  <section id="services" className="home-services"><div className="service-grid">{services.map(({title,text,icon:Icon,href,service})=><div className="card service-card" key={title}><div className="service-icon"><Icon size={18}/></div><div><h3>{title}</h3><p className="muted">{text}</p></div><Link className="btn ghost service-button" href={href || "/plans?service="+service}>Get Started <ArrowRight size={12}/></Link></div>)}</div></section>
   <footer className="site-footer">
    <div className="footer-inner">
     <div className="footer-brand"><Link href="/" className="brand footer-logo"><span className="brand-mark"><Music2 size={13}/></span>TREKO <span>MUSIC</span></Link><p>Music promotion, distribution and artist growth platform in Rwanda.</p></div>
