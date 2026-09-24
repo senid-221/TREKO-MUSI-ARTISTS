@@ -1,0 +1,9 @@
+"use client";
+import {useEffect,useState} from "react"; import Link from "next/link";
+export default function Payments(){
+ const [items,setItems]=useState<any[]>([]),[error,setError]=useState("");
+ async function load(){const r=await fetch("/api/admin/payments");const d=await r.json();if(!r.ok){setError(d.error||"Unable to load");return}setItems(d.payments||[])}
+ useEffect(()=>{load()},[]);
+ async function update(id:string,status:string){const r=await fetch("/api/admin/payments/"+id,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({status})});const d=await r.json();if(!r.ok){setError(d.error||"Update failed");return}setItems((x)=>x.filter((p)=>p.id!==id))}
+ return <main className="shell"><nav className="nav"><Link className="brand" href="/">TREKO <span>MUSI</span></Link><Link href="/admin" className="btn ghost">Admin</Link></nav><section className="section"><div className="eyebrow">Membership Verification</div><h2>Pending Payments</h2>{error&&<p style={{color:"#ffd400"}}>{error}</p>}<div style={{display:"grid",gap:16,marginTop:24}}>{items.map((p)=><div className="card" key={p.id}><h3>{p.artist.stageName}</h3><p className="muted">{p.artist.email}</p><p>Amount: <b>{p.amount.toLocaleString()} RWF</b></p><p className="muted">MTN: {p.phone||"—"} · Reference: {p.reference||"—"}</p><button className="btn primary" onClick={()=>update(p.id,"PAID")}>Approve Payment</button> <button className="btn ghost" onClick={()=>update(p.id,"FAILED")}>Reject</button></div>)}{items.length===0&&<div className="card"><p className="muted">No pending payments.</p></div>}</div></section></main>
+}
