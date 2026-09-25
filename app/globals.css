@@ -85,3 +85,77 @@
  .service-title{font-size:11px}
  .service-row .service-button{font-size:9px;padding:0 8px}
 }
+
+
+/* ===== Treko Music visual refresh ===== */
+body{background:#050505;color:#f5f5f5;letter-spacing:-.01em}
+.shell{width:100%;min-height:100vh}
+.nav{height:58px;max-width:1280px;margin:0 auto;padding:0 32px;border-bottom:1px solid #1d1d1d;background:#050505}
+.brand{font-size:17px;letter-spacing:-.6px}
+.brand-mark{width:25px;height:25px;border-radius:7px}
+.menu-trigger{height:30px;min-height:30px;padding:0 11px}
+
+.compact-hero{max-width:1280px;width:100%;min-height:360px;margin:0 auto;padding:72px 32px 48px;align-items:center}
+.compact-hero>div{max-width:700px}
+.eyebrow{font-size:9px;letter-spacing:2px}
+.compact-hero h1{font-size:46px;line-height:1.02;letter-spacing:-1.8px;margin:13px 0}
+.compact-hero p{max-width:570px;font-size:14px;color:#a7a7a7;line-height:1.65}
+.actions{margin-top:24px;gap:9px}
+
+.home-services{max-width:1100px;width:100%;margin:0 auto;padding:24px 32px 54px}
+.services-header{margin-bottom:22px}
+.services-kicker{font-size:8px;letter-spacing:2.4px}
+.services-header h2{font-size:24px;letter-spacing:-.8px;line-height:1.2}
+.service-list{border-top:1px solid #242424}
+.service-row{min-height:64px;grid-template-columns:42px 1fr auto;padding:0 2px;border-bottom:1px solid #242424;transition:padding .18s ease,background .18s ease}
+.service-row:hover{padding:0 10px;background:#0a0a0a}
+.service-number{font-size:9px;color:#666}
+.service-title{font-size:13px;letter-spacing:-.1px}
+.service-row .service-button{height:30px;min-height:30px;border-radius:6px;padding:0 12px}
+
+.site-footer{margin-top:auto;background:#080808;border-top:1px solid #242424}
+.footer-inner{max-width:1280px;width:100%;margin:0 auto;padding:38px 48px 30px;display:grid;grid-template-columns:minmax(260px,1.6fr) minmax(180px,1fr) minmax(150px,.7fr);column-gap:80px;row-gap:25px;align-items:start}
+.footer-brand p{max-width:310px;font-size:10px;line-height:1.65;color:#777;margin-top:10px}
+.footer-logo{font-size:14px}
+.footer-block h4{font-size:10px;letter-spacing:1px;text-transform:uppercase;margin:1px 0 11px;color:#eee}
+.footer-block>a{font-size:10px;margin:8px 0;color:#999;gap:7px}
+.footer-block.social-column{margin-left:0;justify-self:start}
+.social-links{gap:9px}
+.social-links a{font-size:10px;color:#999}
+.partners{max-width:1280px;width:100%;margin:0 auto;padding:0 48px 24px}
+.partners-heading{padding-bottom:9px;margin-bottom:9px}
+.partners-heading span{font-size:9px;text-transform:uppercase;letter-spacing:1.2px}
+.partner-grid{gap:12px}
+.partner-logo{height:24px}
+.partner-logo img{width:21px;height:21px}
+.partner>span:last-child{font-size:6px}
+.footer-bottom{padding:12px 48px;color:#555;font-size:8px}
+
+@media(max-width:800px){
+ .nav{padding:0 20px}
+ .compact-hero{min-height:320px;padding:58px 20px 38px}
+ .compact-hero h1{font-size:37px}
+ .home-services{padding:22px 20px 40px}
+ .footer-inner{padding:30px 24px 24px;grid-template-columns:1.4fr 1fr;column-gap:45px}
+ .footer-brand{grid-column:1/-1}
+ .partners{padding:0 24px 20px}
+ .footer-bottom{padding:11px 24px}
+}
+@media(max-width:520px){
+ .nav{height:54px;padding:0 15px}
+ .brand{font-size:15px}
+ .compact-hero{min-height:290px;padding:48px 15px 30px}
+ .compact-hero h1{font-size:32px;letter-spacing:-1.2px}
+ .compact-hero p{font-size:12px;line-height:1.55}
+ .home-services{padding:18px 15px 30px}
+ .services-header h2{font-size:18px}
+ .service-row{min-height:56px;grid-template-columns:25px 1fr auto;gap:8px}
+ .service-title{font-size:11px}
+ .footer-inner{grid-template-columns:1fr 1fr;column-gap:28px;padding:26px 18px 20px}
+ .footer-brand{grid-column:1/-1}
+ .footer-brand p{max-width:250px}
+ .footer-block.social-column{margin-left:0}
+ .partners{padding:0 18px 18px}
+ .partner-grid{gap:4px}
+ .footer-bottom{padding:10px 18px}
+}
