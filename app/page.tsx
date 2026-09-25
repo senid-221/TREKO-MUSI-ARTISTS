@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {ArrowRight, Music2, Users, Megaphone, Upload, Menu as MenuIcon, MessageCircle, Instagram, Facebook, Mail, Phone} from "lucide-react";
+import {ArrowRight, Music2, Users, Megaphone, Upload, MessageCircle, Instagram, Facebook, Mail, Phone} from "lucide-react";
 import {getCurrentArtist} from "@/lib/auth";
 
 const partners=[
@@ -21,7 +21,14 @@ export default async function Home(){
  const artist=await getCurrentArtist();
  return <main className="shell home-page">
   <nav className="nav"><Link href="/" className="brand"><span className="brand-mark"><Music2 size={15}/></span>TREKO <span>MUSIC</span></Link>
-   <details className="menu"><summary className="menu-trigger"><MenuIcon size={14}/><span>Menu</span></summary><div className="menu-dropdown"><Link href="#services">Services</Link><Link href="/plans?service=community">Community</Link><Link href="/plans?service=promotion">Promotion</Link><Link href="/plans?service=distribution">Distribution</Link><Link href="#contact">Contact</Link><Link href="/login">Artist Login</Link></div></details>
+   <div className="header-links">
+    <Link href="#services">Services</Link>
+    <Link href="/plans?service=community">Community</Link>
+    <Link href="/plans?service=promotion">Promotion</Link>
+    <Link href="/plans?service=distribution">Promotion</Link>
+    <Link href="#contact">Contact</Link>
+    <Link href="/login">Artist Login</Link>
+   </div>
   </nav>
   <section className="hero compact-hero"><div>
    <div className="eyebrow">Treko Music</div><h1>Build your audience.<br/><span>Grow your music.</span></h1>
