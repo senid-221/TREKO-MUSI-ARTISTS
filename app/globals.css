@@ -223,3 +223,9 @@ body{background:#050505;color:#f5f5f5;letter-spacing:-.01em}
  .header-links{gap:7px}
  .header-links a{font-size:8px}
 }
+
+
+/* Keep Treko Music brand anchored to the left corner */
+.nav{justify-content:space-between}
+.nav>.brand{margin-right:auto;justify-self:start}
+.header-links{margin-left:auto;justify-content:flex-end}
