@@ -31,13 +31,11 @@ export default async function Home(){
   <section className="home-services" id="services">
    <div className="service-grid">
     {services.map((service)=>{
-      const Icon=service.icon;
       const href=service.href || `/plans?service=${service.service}`;
-      return <article className="card service-card" key={service.title}>
-       <div className="service-icon"><Icon size={16}/></div>
-       <div><h3>{service.title}</h3><p className="muted">{service.text}</p></div>
+      return <div className="service-item" key={service.title}>
+       <span className="service-title">{service.title}</span>
        <Link className="btn primary service-button" href={href}>Get Started <ArrowRight size={12}/></Link>
-      </article>;
+      </div>;
     })}
    </div>
   </section>
