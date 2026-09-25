@@ -209,3 +209,17 @@ body{background:#050505;color:#f5f5f5;letter-spacing:-.01em}
  .footer-block.social-column{grid-column:1;grid-row:2}
  .footer-block#contact{grid-column:2;grid-row:2}
 }
+
+
+/* Desktop header navigation */
+.header-links{display:flex;align-items:center;gap:20px}
+.header-links a{font-size:10px;font-weight:700;color:#aaa;transition:color .18s ease}
+.header-links a:hover{color:#ffd400}
+@media(max-width:800px){
+ .header-links{gap:10px}
+ .header-links a{font-size:9px}
+}
+@media(max-width:600px){
+ .header-links{gap:7px}
+ .header-links a{font-size:8px}
+}
