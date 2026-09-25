@@ -159,3 +159,20 @@ body{background:#050505;color:#f5f5f5;letter-spacing:-.01em}
  .partner-grid{gap:4px}
  .footer-bottom{padding:10px 18px}
 }
+
+
+/* Footer: Social left, Contact right */
+.footer-inner{grid-template-columns:1.5fr 1fr 1fr}
+.footer-block.social-column{grid-column:2;justify-self:start;margin-left:0}
+.footer-block#contact{grid-column:3;justify-self:end;text-align:left}
+@media(max-width:800px){
+ .footer-inner{grid-template-columns:1fr 1fr}
+ .footer-brand{grid-column:1/-1}
+ .footer-block.social-column{grid-column:1;justify-self:start}
+ .footer-block#contact{grid-column:2;justify-self:end}
+}
+@media(max-width:520px){
+ .footer-inner{grid-template-columns:1fr 1fr}
+ .footer-block.social-column{grid-column:1;justify-self:start}
+ .footer-block#contact{grid-column:2;justify-self:end}
+}
