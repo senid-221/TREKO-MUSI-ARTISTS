@@ -25,7 +25,7 @@ export default async function Home(){
     <Link href="#services">Services</Link>
     <Link href="/plans?service=community">Community</Link>
     <Link href="/plans?service=promotion">Promotion</Link>
-    <Link href="/plans?service=distribution">Promotion</Link>
+    <Link href="/plans?service=distribution">Distribution</Link>
     <Link href="#contact">Contact</Link>
     <Link href="/login">Artist Login</Link>
    </div>
