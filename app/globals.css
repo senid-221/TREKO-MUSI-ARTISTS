@@ -50,3 +50,8 @@
 .footer-block.social-column{justify-self:start;margin-left:25px}
 @media(max-width:800px){.footer-inner{column-gap:35px}.footer-block.social-column{margin-left:10px}}
 @media(max-width:520px){.footer-inner{column-gap:22px}.footer-block.social-column{margin-left:0}}
+
+
+/* Keep the homepage footer at the bottom of the page */
+.home-page{min-height:100vh;display:flex;flex-direction:column}
+.home-page .site-footer{margin-top:auto}
