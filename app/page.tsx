@@ -29,12 +29,17 @@ export default async function Home(){
    <div className="actions">{artist?<Link className="btn primary" href="/dashboard">Artist Profile <ArrowRight size={14}/></Link>:<><Link className="btn primary" href="/register">Create Artist Account <ArrowRight size={14}/></Link><Link className="btn ghost" href="/login">Artist Login</Link></>}</div>
   </div></section>
   <section className="home-services" id="services">
-   <div className="service-grid">
-    {services.map((service)=>{
+   <div className="services-header">
+    <span className="services-kicker">For Artists</span>
+    <h2>Everything you need to move your music forward.</h2>
+   </div>
+   <div className="service-list">
+    {services.map((service,index)=>{
       const href=service.href || `/plans?service=${service.service}`;
-      return <div className="service-item" key={service.title}>
+      return <div className="service-row" key={service.title}>
+       <span className="service-number">0{index+1}</span>
        <span className="service-title">{service.title}</span>
-       <Link className="btn primary service-button" href={href}>Get Started <ArrowRight size={12}/></Link>
+       <Link className="btn ghost service-button" href={href}>Get Started <ArrowRight size={12}/></Link>
       </div>;
     })}
    </div>
