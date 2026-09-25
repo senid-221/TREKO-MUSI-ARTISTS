@@ -64,3 +64,24 @@
 .service-item .service-button{margin:0;flex:none}
 @media(max-width:900px){.service-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.service-grid{grid-template-columns:1fr 1fr;gap:10px}.service-item{display:flex;flex-direction:column;align-items:flex-start;gap:6px}.service-title{font-size:11px}}
+
+
+/* Modern music-platform service section */
+.home-services{max-width:980px;margin:0 auto;padding:34px 6% 38px}
+.services-header{margin-bottom:16px}
+.services-kicker{font-size:9px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#ffd400}
+.services-header h2{max-width:520px;margin:6px 0 0;font-size:22px;line-height:1.15;letter-spacing:-.5px;color:#fff}
+.service-list{border-top:1px solid #292929}
+.service-row{min-height:58px;display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:14px;border-bottom:1px solid #292929}
+.service-row:hover{background:#0b0b0b}
+.service-number{font-size:9px;color:#666;font-weight:800}
+.service-title{font-size:13px;font-weight:800;color:#eee}
+.service-row .service-button{margin:0;background:transparent;color:#fff;border:1px solid #353535;height:29px;min-height:29px;padding:0 10px}
+.service-row .service-button:hover{border-color:#ffd400;color:#ffd400;background:#111}
+@media(max-width:600px){
+ .home-services{padding:25px 6% 30px}
+ .services-header h2{font-size:18px}
+ .service-row{min-height:54px;grid-template-columns:28px 1fr auto;gap:8px}
+ .service-title{font-size:11px}
+ .service-row .service-button{font-size:9px;padding:0 8px}
+}
